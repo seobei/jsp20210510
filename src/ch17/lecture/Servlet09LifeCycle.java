@@ -8,40 +8,34 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class Servlet06Post
+ * Servlet implementation class Servlet09LifeCycle
  */
-@WebServlet("/Servlet06Post")
-public class Servlet06Post extends HttpServlet {
+@WebServlet("/Servlet09LifeCycle")
+public class Servlet09LifeCycle extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Servlet06Post() {
+    public Servlet09LifeCycle() {
         super();
         // TODO Auto-generated constructor stub
+        System.out.println("Servlet 09 생성자 실행");
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		response.getWriter().print("Servlet09 doget method...");
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("utf-8");
-		System.out.println("servlet06 doPost method...");
-		
-		String name = request.getParameter("name");
-		String address = request.getParameter("address");
-		
-		System.out.println(name);
-		System.out.println(address);
+		// TODO Auto-generated method stub
+		doGet(request, response);
 	}
 
 }

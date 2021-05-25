@@ -1,23 +1,28 @@
 package ch17.lecture;
 
 import java.io.IOException;
+
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebInitParam;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class Servlet06Post
+ * Servlet implementation class Servlet11InitParam
  */
-@WebServlet("/Servlet06Post")
-public class Servlet06Post extends HttpServlet {
+@WebServlet(value = "/Servlet11InitParam",
+initParams = {@WebInitParam(name= "name", value = "donald"),
+			@WebInitParam(name = "age", value = "99")})
+public class Servlet11InitParam extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Servlet06Post() {
+    public Servlet11InitParam() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -26,22 +31,20 @@ public class Servlet06Post extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		ServletConfig config = getServletConfig();
+		String name = config.getInitParameter("name");
+		String age= config.getInitParameter("age");
+		
+		System.out.println(name);
+		System.out.println(age);
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("utf-8");
-		System.out.println("servlet06 doPost method...");
-		
-		String name = request.getParameter("name");
-		String address = request.getParameter("address");
-		
-		System.out.println(name);
-		System.out.println(address);
+		// TODO Auto-generated method stub
+		doGet(request, response);
 	}
 
 }
