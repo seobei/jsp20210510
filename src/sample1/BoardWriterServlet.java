@@ -1,9 +1,10 @@
 package sample1;
 
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -29,13 +30,14 @@ public class BoardWriterServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("board writer doget...");
+		System.out.println("board writer doGet..");
 		
 		String path = "/WEB-INF/sample1/boardForm.jsp";
 		RequestDispatcher dispatcher = request.getRequestDispatcher(path);
-		dispatcher.forward(request,response);
+		dispatcher.forward(request, response);
+		
 //		PrintWriter out = response.getWriter();
-//		out.print("<form>");
+//		out.print("<form >");
 //		out.print("</form>");
 	}
 
@@ -43,8 +45,29 @@ public class BoardWriterServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		request.setCharacterEncoding("utf-8");
+		
+		ServletContext application = request.getServletContext();
+		List<Board> list = (List<Board>) application.getAttribute("boards");
+		
+		String title = request.getParameter("title");
+		String body = request.getParameter("body");
+		
+		Board board = new Board();
+		board.setTitle(title);
+		board.setBody(body);
+		
+		list.add(board);
+		
+		response.sendRedirect(request.getContextPath()+"/sample1/list");
 	}
 
 }
+
+
+
+
+
+
+
+

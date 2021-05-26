@@ -22,24 +22,34 @@
 <div class="container mt-5">
 	<div class="row justify-content-center">
 		<div class="col-8">
-			<h1>글 쓰기</h1>
-			<form action="" method="post">
-				<div class="form-group" >
-					<label for="input1">제목</label>
-					<input type="text" name="title" class="form-control" id="input1">
-				</div>
-				<div class="form-group">
-					<label for="textarea1">본문</label>
-					<textarea class="form-control" name="body" rows="5" id="textarea1"></textarea>
-				</div>
-				<input type="submit" class="btn btn-primary"/>
-			</form>
+			<h1>목록 보기</h1>
+			<table class="table">
+				<thead>
+					<tr>
+						<th>#</th>
+						<th>제목</th>
+					</tr>
+				</thead>
+				<tbody>
+					<c:forEach items="${list }" var="board" varStatus="status">
+						<tr>
+							<td>${status.count }</td>
+							<td>
+								<a href="detail?index=${status.index }">
+									${board.title }
+								</a>
+							
+							</td>
+						</tr>
+					</c:forEach>
+				</tbody>
+				
+			</table>
 		</div>
 	</div>
 </div>
 </body>
 </html>
-
 
 
 
