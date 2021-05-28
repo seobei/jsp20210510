@@ -10,9 +10,7 @@
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
   
-  <listener>
-  	<listener-class>ch20.AppListener01</listener-class>
-  </listener>
+
   
   <listener>
   	<listener-class>sample1.BoardAppListener</listener-class>
@@ -119,23 +117,7 @@
   	</url-pattern>
   </servlet-mapping>  
   
-  <servlet>
-  	<servlet-name>
-  		servlet15
-  	</servlet-name>
-  	<servlet-class>
-  		ch17.lecture.Servlet15Startup
-  	</servlet-class>
-  	<load-on-startup>2</load-on-startup>
-  </servlet>
-  <servlet-mapping>
-  	<servlet-name>
-  		servlet15
-  	</servlet-name>
-  	<url-pattern>
-  		/servlet15
-  	</url-pattern>
-  </servlet-mapping>
+
   
   <servlet>
   	<servlet-name>DBCPInit2</servlet-name>
@@ -165,6 +147,8 @@
   	<load-on-startup>1</load-on-startup>
   </servlet>
 
+
+  
   
 </web-app>
 
