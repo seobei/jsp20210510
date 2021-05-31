@@ -6,6 +6,8 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,20 +15,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import ch14.bean.Customer;
 import ch14.bean.Employee;
 
 /**
- * Servlet implementation class JDBC11Servlet
+ * Servlet implementation class JDBC12Servlet
  */
-@WebServlet("/JDBC11Servlet")
-public class JDBC11Servlet extends HttpServlet {
+@WebServlet("/JDBC12Servlet")
+public class JDBC12Servlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public JDBC11Servlet() {
+    public JDBC12Servlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -36,22 +37,20 @@ public class JDBC11Servlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String employeeId = request.getParameter("eid");
+		List<Employee> list = executeJDBC();
+	
+		request.setAttribute("employees", list);
 		
-		Employee employee = executeJDBC(employeeId);
-		request.setAttribute("emp", employee);
-		
-		String path = "/ch14/jdbc11.jsp";
+		String path = "/ch14/jdbc12.jsp";
 		request.getRequestDispatcher(path).forward(request, response);
 	}
 	
-	private Employee executeJDBC(String id) {
+	private List<Employee> executeJDBC() {
 
-		Employee employee= null; // 리턴할 객체
+		List<Employee> list = new ArrayList<>(); // 리턴할 객체
 		
-		String sql = "select EmployeesID, LastName, firstName " + 
-				"FROM Employees " + 
-				"WHERE EmployeeID = " + id;
+		String sql = "SELECT EmployeeID, LastName, FirstName " + 
+				"FROM Employees ";
 
 		String url = "jdbc:mysql://52.78.42.226/test"; // 본인 ip
 		String user = "root";
@@ -75,14 +74,13 @@ public class JDBC11Servlet extends HttpServlet {
 			rs = stmt.executeQuery(sql);
 
 			// 결과 탐색
-			if (rs.next()) {
-				String name = rs.getString(1);
-				String city = rs.getString(2);
-				
-				employee = new Employee();
+			while (rs.next()) {
+				Employee employee = new Employee();
 				employee.setId(rs.getInt(1));
 				employee.setLastName(rs.getString(2));
 				employee.setFirstName(rs.getString(3));
+				
+				list.add(employee);
 			}
 
 		} catch (Exception e) {
@@ -117,7 +115,7 @@ public class JDBC11Servlet extends HttpServlet {
 			}
 		}
 
-		return employee;
+		return list;
 
 	}
 
