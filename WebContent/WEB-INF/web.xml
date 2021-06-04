@@ -148,6 +148,15 @@
   </servlet>
 
 
+  <filter>
+  	<filter-name>charSetFilter</filter-name>
+  	<filter-class>sample2.filter.RequestCharSetFilter</filter-class>
+  </filter>
+  
+  <filter-mapping>
+  	<filter-name>charSetFilter</filter-name>
+  	<url-pattern>/sample2/*</url-pattern>
+  </filter-mapping>
   
   
 </web-app>
