@@ -1,4 +1,4 @@
-package sample2.controller;
+package sample2.controller.member;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -12,7 +12,7 @@ import sample2.dao.MemberDao;
 /**
  * Servlet implementation class Sample2CheckDupServlet
  */
-@WebServlet("/sample2/checkdup")
+@WebServlet("/sample2/member/checkdup")
 public class Sample2CheckDupServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
